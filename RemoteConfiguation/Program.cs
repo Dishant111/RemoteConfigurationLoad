@@ -2,8 +2,8 @@ using RemoteConfiguation;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var remoteConfigEndpoint = "https://service1.dishant.dev/swagger/v1/swagger.json";
-var reloadInterval = TimeSpan.FromMinutes(5);
+var remoteConfigEndpoint = "https://localhost:44372/GetConfiguration/app";
+var reloadInterval = TimeSpan.FromSeconds(15);
 
 builder.Configuration.AddRemoteConfiguration(remoteConfigEndpoint, reloadInterval);
 

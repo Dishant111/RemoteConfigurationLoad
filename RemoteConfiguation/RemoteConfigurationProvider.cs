@@ -1,4 +1,7 @@
-﻿namespace RemoteConfiguation;
+﻿using System.Net.Mime;
+using System.Text.Json;
+
+namespace RemoteConfiguation;
 
 public class RemoteConfigurationProvider : ConfigurationProvider
 {
@@ -21,7 +24,12 @@ public class RemoteConfigurationProvider : ConfigurationProvider
     private async Task LoadConfigurationAsync()
     {
         using var client = new HttpClient();
-        var response = await client.GetAsync(_endpoint);
+        var ip = new FileInPut()
+        {
+         Key   = "Supersecret"
+        };         
+        
+        var response = await client.PostAsync(_endpoint, new StringContent(JsonSerializer.Serialize(ip),null,MediaTypeNames.Application.Json));
 
         if (response.IsSuccessStatusCode)
         {
@@ -53,4 +61,9 @@ public class RemoteConfigurationProvider : ConfigurationProvider
             }
         }, null, _reloadInterval, _reloadInterval);
     }
+}
+
+public class FileInPut
+{
+    public string Key { get; set; }
 }

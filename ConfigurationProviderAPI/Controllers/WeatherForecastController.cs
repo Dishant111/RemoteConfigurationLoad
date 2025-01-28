@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace RemoteConfiguation.Controllers;
+namespace ConfigurationProviderAPI.Controllers;
 
 [ApiController]
 [Route("[controller]")]
@@ -12,12 +12,10 @@ public class WeatherForecastController : ControllerBase
     };
 
     private readonly ILogger<WeatherForecastController> _logger;
-    private readonly IConfiguration _configuration;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger,IConfiguration configuration)
+    public WeatherForecastController(ILogger<WeatherForecastController> logger)
     {
         _logger = logger;
-        _configuration = configuration;
     }
 
     [HttpGet(Name = "GetWeatherForecast")]
@@ -27,7 +25,7 @@ public class WeatherForecastController : ControllerBase
             {
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
                 TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = _configuration["ConncetionStriong"].ToString()
+                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
             .ToArray();
     }

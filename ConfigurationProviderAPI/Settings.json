@@ -1,0 +1,9 @@
+﻿{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "ConncetionStriong" : "from providwer sonncetionstring 233"
+}
