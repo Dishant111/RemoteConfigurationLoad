@@ -1,0 +1,6 @@
+@RemoteConfiguation_HostAddress = http://localhost:5219
+
+GET {{RemoteConfiguation_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
